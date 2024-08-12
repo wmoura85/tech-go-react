@@ -1,0 +1,17 @@
+services:
+  db:
+    image: postgres:latest
+    restart: unless-stopped
+    ports:
+      - ${TGRS_DATABASE_PORT:-5432}:5432
+    environment:
+      POSTGERS_USER: ${TGRS_DATABASE_USER}
+      POSTGRES_PASSWORD: ${TGRS_DATABASE_PASSWORD}
+      POSTGERS_DB: ${TGRS_DATABASE_NAME}
+      POSTGRES_HOST_AUTH_METHOD: ${TGRS_DATABASE_AUTH_METHOD}
+    volumes:
+      - db:/var/lib/postgresql/data
+
+volumes:
+  db:
+    driver: local
